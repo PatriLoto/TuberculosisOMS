@@ -148,3 +148,50 @@ plot_region_case_fatality <- region_case_fatality %>%
 
 plot_region_case_fatality +
   labs(caption = "@seabbs Source: WHO")
+
+
+
+#--------------------------------------------------------------------
+#----------------------------------------------------------------------------------
+
+library(dplyr)
+
+global_tb <- summarise_tb_burden(compare_to_world = TRUE,
+                                 annual_change = TRUE,
+                                 stat = "rate",
+                                 verbose = FALSE) %>% filter(area == "Global")%>%View()
+#-------------------------------#---------------------------------------------------------------------
+#--------------------------------------------------------------------
+#compara el valor de un país con otros valores
+getTBinR::plot_tb_burden_overview(metric = "e_inc_100k",
+                                  countries = "United Kingdom",
+                                  compare_to_region = TRUE,
+                                  interactive = FALSE)
+
+#serie de tiempo desde 2000 a 2015
+getTBinR::plot_tb_burden(metric = "e_inc_100k",
+                         countries = "Argentina",
+                         interactive = FALSE)
+
+#reporte de tuberculosis
+render_country_report(country = "Argentina", save_dir = ".")
+
+#funciona  Twitter 1 cuadro comparativo
+# introducís un país y te lo compara con el resto de los países del continete al cual pertenece
+country <- "Argentina" #United Kingdom #Argentina
+interactive <- FALSE
+
+#%>%View()
+#cuadro comparativo cdela tasa de incidencia con otros paìseps
+p<-plot_tb_burden_overview(countries = 'Argentina',
+                        compare_to_region = TRUE,
+                        interactive = interactive,
+                        verbose = FALSE)+ scale_fill_viridis(option = "B", direction = -1)+
+  labs(x="",y="Incidencia estimada cada 100.000 habitantes", legend.title=" ", 
+       title="Comparativo de incidencia en  Países del continente Americano",
+       
+       caption = "Source: Organización Mundial de la Salud")+
+  theme(axis.text.y = element_text(angle =720, vjust = 1.5,  size=8))
+ggplotly
+p <- ggplotly(text = paste(' hoverformat='2.F', tooltip = "text"))
+
