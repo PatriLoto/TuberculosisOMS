@@ -8,6 +8,7 @@ Para visualizar los datos de esta semana utilicé principalmente el paquete **ge
 * getTBinR::plot_tb_burden_summary
 * getTBinR::plot_tb_burden
 * getTBinR::summarise_metric
+
 Las que me parecieron más interesantes son:
 
 * getTBinR::map_tb_burden
